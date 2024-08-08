@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectMongoDb from "../../../../../libs/mongodb";
-import User from "../../../../../models/user";
+import connectMongoDb from "../../../../libs/mongodb";
+import User from "../../../../models/user";
 import bcrypt from "bcrypt"
 
 export async function POST(req) {
@@ -14,7 +14,6 @@ export async function POST(req) {
             });
         }
 
-        // Check if user already exists
         await connectMongoDb();
         const existingUser = await User.findOne({ email });
 
@@ -34,11 +33,9 @@ export async function POST(req) {
         return NextResponse.json({ message: "User registered successfully" }, {
             status: 201
         });
-    } catch (error) {
-        console.error(error);  // Log the error for debugging
-        return NextResponse.json({ message: "Internal server error" }, {
-            status: 500
-        });
+    }   catch (error) {
+            console.error(error);  // Log the error for debugging
+            return NextResponse.json({error:error.message}, {status: 500});
     }
 }
 

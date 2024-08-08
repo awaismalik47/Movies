@@ -26,7 +26,7 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json({ message: "Movie Updated", movie: updatedMovie }, { status: 200 });
   } catch (error) {
-    console.error('Error updating movie:', error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+        console.error('Error updating movie:', error);
+        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
